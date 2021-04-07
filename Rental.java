@@ -53,17 +53,6 @@ public class Rental {
 			return limit ;
 		}
 
-		switch (video.getVideoType()) {
-			case Video.VHS: 
-				limit = 5;
-				break ;
-			case Video.CD:
-				limit = 3;
-				break ;
-			case Video.DVD:
-				limit = 2;
-				break ;
-		}
-		return limit ;
+		return video.getDefaultRentalLimit();
 	}
 }

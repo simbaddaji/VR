@@ -42,7 +42,7 @@ public class Customer {
 	}
 
 	private double discountCharge(int daysRented) {
-		return (daysRented - 2) * 1.5;
+		return daysRented > 2 ? (daysRented - 2) * 1.5 : 0;
 	}
 
 	public String getReport() {
@@ -84,8 +84,9 @@ public class Customer {
 			switch (video.getPriceCode()) {
 			case Video.REGULAR:
 				eachCharge += 2;
-				if (daysRented > 2)
-					eachCharge += discountCharge(daysRented); // Decompose Conditional
+				eachCharge += discountCharge(daysRented); // Decompose Conditional
+
+//				if (daysRented > 2)
 //					eachCharge += (daysRented - 2) * 1.5;
 				break;
 			case Video.NEW_RELEASE:
@@ -95,14 +96,14 @@ public class Customer {
 
 			eachPoint++;
 
-			if ((video.getPriceCode() == Video.NEW_RELEASE) ) // ìž¬ì„ ì–¸í•œ ë³€ìˆ˜ ì°¸ì¡°
+			if ((video.getPriceCode() == Video.NEW_RELEASE) ) // Àç¼±¾ðÇÑ º¯¼ö ÂüÁ¶
 				eachPoint++;
 
 			if ( daysRented > each.getDaysRentedLimit() )
 				eachPoint -= Math.min(eachPoint, video.getLateReturnPointPenalty()) ;
 
 			result += "\t" + video.getTitle() + "\tDays rented: " + daysRented + "\tCharge: " + eachCharge
-					+ "\tPoint: " + eachPoint + "\n"; // ìž¬ì„ ì–¸í•œ ë³€ìˆ˜ ì°¸ì¡°
+					+ "\tPoint: " + eachPoint + "\n"; // Àç¼±¾ðÇÑ º¯¼ö ÂüÁ¶
 
 			totalCharge += eachCharge;
 
