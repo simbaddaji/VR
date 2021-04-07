@@ -26,33 +26,14 @@ public class VRController {
 		return null;
 	}
 
-	public Video findVideo(String videoTitle) {
+	public Video findVideo(String videoTitle, boolean rentedValue) {
 		for (Video video : videos) {
-			if (video.getTitle().equals(videoTitle) && video.isRented() == false) {
+			if (video.getTitle().equals(videoTitle) && (video.isRented() == rentedValue)) {
 				return video;
 			}
 		}
 
 		return null;
-	}
-
-	public void rentVideo(String customerName, String videoTitle) {
-		Customer foundCustomer = findCustomer(customerName);
-		if (foundCustomer == null) {
-			return;
-		}
-
-		Video foundVideo = findVideo(videoTitle);
-		if (foundVideo == null) {
-			return;
-		}
-
-		Rental rental = new Rental(foundVideo);
-		foundVideo.setRented(true);
-
-		List<Rental> customerRentals = foundCustomer.getRentals();
-		customerRentals.add(rental);
-		foundCustomer.setRentals(customerRentals);
 	}
 
 	public String getCustomerReport(String customerName) {
@@ -80,19 +61,23 @@ public class VRController {
 		videos.add(new Video(videoTitle, videoType, priceCode, new Date()));
 	}
 
-	public boolean addRental(String customerName, String videoTitle) {
-		Customer customer = findCustomer(customerName);
-		if (customer == null) {
-			return false;
+	public void rentVideo(String customerName, String videoTitle) {
+		Customer foundCustomer = findCustomer(customerName);
+		if (foundCustomer == null) {
+			return;
 		}
 
-		Video video = findVideo(videoTitle);
-		if (video == null) {
-			return false;
+		Video foundVideo = findVideo(videoTitle, false);
+		if (foundVideo == null) {
+			return;
 		}
 
-		customer.addRental(new Rental(video));
-		return true;
+		Rental rental = new Rental(foundVideo);
+		foundVideo.setRented(true);
+
+		List<Rental> customerRentals = foundCustomer.getRentals();
+		customerRentals.add(rental);
+		foundCustomer.setRentals(customerRentals);
 	}
 
 	public boolean returnVideo(String customerName, String videoTitle) {
@@ -101,7 +86,7 @@ public class VRController {
 			return false;
 		}
 
-		Video video = findVideo(videoTitle);
+		Video video = findVideo(videoTitle, true);
 		if (video == null) {
 			return false;
 		}

@@ -17,7 +17,6 @@ public class Video {
 
 	public Video(String title, int videoType, int priceCode, Date registeredDate) {
 		this.setTitle(title) ;
-		this.setVideoType(videoType) ;
 		this.setPriceCode(priceCode) ;
 		this.registeredDate = registeredDate ;
 	}
@@ -55,19 +54,7 @@ public class Video {
 		this.rented = rented;
 	}
 
-	//public Date getRegisteredDate() {
-	//	return registeredDate;
-	//}
-
-	//public void setRegisteredDate(Date registeredDate) {
-	//	this.registeredDate = registeredDate;
-	//}
-
 	public int getVideoType() {
 		return videoType;
 	}
-
-	//public void setVideoType(int videoType) {
-	//	this.videoType = videoType;
-	//}
 }
