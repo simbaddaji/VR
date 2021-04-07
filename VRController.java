@@ -12,8 +12,10 @@ public class VRController {
 	}
 
 	public void registerVideo(String title, int videoType, int priceCode, Date registeredDate) {
-		Video video = new Video(title, videoType, priceCode, registeredDate);
-		videos.add(video);
+		Video video = VideoFactory.create(videoType, title, priceCode, registeredDate);
+		if (video != null) {
+			videos.add(video);
+		}
 	}
 
 	public Customer findCustomer(String customerName) {
@@ -58,7 +60,10 @@ public class VRController {
 	}
 
 	public void addVideo(String videoTitle, int videoType, int priceCode) {
-		videos.add(new Video(videoTitle, videoType, priceCode, new Date()));
+		Video video = VideoFactory.create(videoType, videoTitle, priceCode, new Date());
+		if (video != null) {
+			videos.add(video);
+		}
 	}
 
 	public void rentVideo(String customerName, String videoTitle) {
@@ -102,7 +107,7 @@ public class VRController {
 
 		return false;
 	}
-	
+
 	public String getRentalList(Customer customer) {
 		String msg = "";
 		for (Rental rental : customer.getRentals()) {
@@ -117,7 +122,7 @@ public class VRController {
 		if (customer == null) {
 			return false;
 		}
-		
+
 		List<Rental> rentals = new ArrayList<Rental>();
 		customer.setRentals(rentals);
 		return true;

@@ -96,14 +96,14 @@ public class Customer {
 
 			eachPoint++;
 
-			if ((video.getPriceCode() == Video.NEW_RELEASE) ) // ìž¬ì„ ì–¸í•œ ë³€ìˆ˜ ì°¸ì¡°
+			if ((video.getPriceCode() == Video.NEW_RELEASE) ) // Àç¼±¾ðÇÑ º¯¼ö ÂüÁ¶
 				eachPoint++;
 
 			if ( daysRented > each.getDaysRentedLimit() )
 				eachPoint -= Math.min(eachPoint, video.getLateReturnPointPenalty()) ;
 
 			result += "\t" + video.getTitle() + "\tDays rented: " + daysRented + "\tCharge: " + eachCharge
-					+ "\tPoint: " + eachPoint + "\n"; // ìž¬ì„ ì–¸í•œ ë³€ìˆ˜ ì°¸ì¡°
+					+ "\tPoint: " + eachPoint + "\n"; // Àç¼±¾ðÇÑ º¯¼ö ÂüÁ¶
 
 			totalCharge += eachCharge;
 
